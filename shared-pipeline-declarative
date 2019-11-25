@@ -1,0 +1,27 @@
+/*
+Firstly, you need to add a new Credential in Jenkins to access your Git.
+Grab the ID of the Credential and use it in the credentialsId field below.
+*/
+
+
+
+library identifier: 'shared-pipeline-example@master', 
+    //'master' refers to a valid git-ref
+    //'mylibraryname' can be any name
+retriever: modernSCM([
+  $class: 'GitSCMSource',
+  credentialsId: '8bea435f-adf8-498a-b563-fcae25406345',
+  remote: 'https://github.com/sasmita016/shared-pipeline-example.git'
+])
+
+pipeline {
+    agent any
+    stages {
+        stage('Demo') {
+            steps {
+                echo 'Hello world'
+                sayHello 'Amayra'
+            }
+        }
+    }
+}
