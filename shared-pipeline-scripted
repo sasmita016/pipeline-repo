@@ -1,0 +1,42 @@
+@Library('shared-pipeline-example')_
+@NonCPS
+import jenkins.model.Jenkins
+import java.util.logging.LogManager
+import groovy.json.JsonSlurperClassic
+
+stage('Demo') {
+    
+    def logger = LogManager.getLogManager().getLogger("")
+
+/* JENKINS_HOME environment variable is not reliable */
+    def jenkinsHome = Jenkins.instance.getRootDir().absolutePath
+    echo jenkinsHome
+//def propertiesFile = new File("${jenkinsHome}/jenkins.properties")
+
+
+    //propertiesFile = "/var/lib/jenkins/jenkins.properties"
+    echo '1'
+    readProperties = readProperties file: "/var/lib/jenkins/jenkins.properties"
+    echo '2'
+    echo """ the git url is: ${readProperties[GIT_URL]}"""
+    echo '3'
+    echo giturl
+    echo '4'
+// if (propertiesFile.exists()) {
+//     logger.info("Loading system properties from ${propertiesFile.absolutePath}")
+//     propertiesFile.withReader { r ->
+//         /* Loading java.util.Properties as defaults makes empty Properties object */
+//         def props = new Properties()
+//         props.load(r)
+//         props.each { key, value ->
+//             System.setProperty(key, value)
+//         }
+//         echo props
+//     }
+// }
+
+
+    echo 'Hello world'
+    sayHello 'Amayra'
+    //echo jenkinsHome
+}
